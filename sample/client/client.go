@@ -24,7 +24,7 @@ func main() {
 	//	log.Fatalf("Failed to load TLS certificate")
 	//}
 
-	conn, err := grpc.Dial(address)
+	conn, err := grpc.Dial(address, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Did not connect, %v", err)
 	}
