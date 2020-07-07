@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile.server
 
   haproxy:
-    image: haproxytech/haproxy-ubuntu:1.9.2
+    image: haproxytech/haproxy-ubuntu:2.0.14
     volumes:
     - "./sample/haproxy/haproxy.cfg:/etc/haproxy/haproxy.cfg"
     - "./sample/creds/haproxy.pem:/etc/haproxy/pem/haproxy.pem"
