@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "codenamecreator";
+option go_package = ".;codenamecreator";
 
 message NameRequest {
     string category = 1;
