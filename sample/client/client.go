@@ -36,8 +36,8 @@ func main() {
 	// Optional: add some metadata
 	ctx = metadata.AppendToOutgoingContext(ctx, "mysecretpassphrase", "abc123")
 
-	getCodenamesStreamingExample(ctx, client)
-	// getSingleCodenameAndExitExample(ctx, client, "Science")
+	//getCodenamesStreamingExample(ctx, client)
+	getSingleCodenameAndExitExample(ctx, client, "Science")
 }
 
 func getSingleCodenameAndExitExample(ctx context.Context, client creator.CodenameCreatorClient, category string) {
