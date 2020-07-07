@@ -7,7 +7,8 @@ message NameRequest {
 }
 
 message NameResult {
-    string name = 1;
+    string name  = 1;
+    bytes unused = 2;
 }
 
 service CodenameCreator {
