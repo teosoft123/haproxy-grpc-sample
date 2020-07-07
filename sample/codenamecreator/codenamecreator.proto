@@ -4,11 +4,11 @@ option go_package = ".;codenamecreator";
 
 message NameRequest {
     string category = 1;
+    bytes  unused   = 2;
 }
 
 message NameResult {
     string name  = 1;
-    bytes unused = 2;
 }
 
 service CodenameCreator {
