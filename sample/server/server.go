@@ -11,10 +11,9 @@ import (
 	"time"
 
 	// The Protobuf generated file
-	creator "app/codenamecreator"
+	creator "github.com/xin-hedera/haproxy-grpc-sample/sample/codenamecreator"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/metadata"
 )
 
@@ -38,10 +37,10 @@ func (cg *codenameGenerator) generate(category string) string {
 	if strings.ToLower(category) == "science" {
 		scientistNumber := rand.Intn(len(cg.Scientists))
 		return fmt.Sprintf("%s %s", cg.Adverbs[adverbNumber], cg.Scientists[scientistNumber])
-	} else {
-		animalNumber := rand.Intn(len(cg.Animals))
-		return fmt.Sprintf("%s %s", cg.Adverbs[adverbNumber], cg.Animals[animalNumber])
 	}
+
+	animalNumber := rand.Intn(len(cg.Animals))
+	return fmt.Sprintf("%s %s", cg.Adverbs[adverbNumber], cg.Animals[animalNumber])
 }
 
 type codenameServer struct{}
@@ -106,20 +105,13 @@ func (s *codenameServer) KeepGettingCodenames(stream creator.CodenameCreator_Kee
 
 func main() {
 	address := ":3000"
-	crt := "server.crt"
-	key := "server.key"
 
 	lis, err := net.Listen("tcp", address)
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 
-	creds, err := credentials.NewServerTLSFromFile(crt, key)
-	if err != nil {
-		log.Fatalf("Failed to load TLS keys")
-	}
-
-	grpcServer := grpc.NewServer(grpc.Creds(creds))
+	grpcServer := grpc.NewServer()
 	creator.RegisterCodenameCreatorServer(grpcServer, &codenameServer{})
 
 	log.Println("Listening on address ", address)
