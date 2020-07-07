@@ -9,23 +9,22 @@ import (
 	"time"
 
 	// The Protobuf generated file
-	creator "app/codenamecreator"
+	creator "github.com/xin-hedera/haproxy-grpc-sample/sample/codenamecreator"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/metadata"
 )
 
 func main() {
 	address := os.Getenv("SERVER_ADDRESS")
-	crt := os.Getenv("TLS_CERT")
+	//crt := os.Getenv("TLS_CERT")
+	//
+	//creds, err := credentials.NewClientTLSFromFile(crt, "")
+	//if err != nil {
+	//	log.Fatalf("Failed to load TLS certificate")
+	//}
 
-	creds, err := credentials.NewClientTLSFromFile(crt, "")
-	if err != nil {
-		log.Fatalf("Failed to load TLS certificate")
-	}
-
-	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(creds))
+	conn, err := grpc.Dial(address)
 	if err != nil {
 		log.Fatalf("Did not connect, %v", err)
 	}
