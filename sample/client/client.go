@@ -9,7 +9,7 @@ import (
 	"time"
 
 	// The Protobuf generated file
-	creator "github.com/xin-hedera/haproxy-grpc-sample/sample/codenamecreator"
+	creator "sample/codenamecreator"
 
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"

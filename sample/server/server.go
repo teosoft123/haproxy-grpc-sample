@@ -11,7 +11,7 @@ import (
 	"time"
 
 	// The Protobuf generated file
-	creator "github.com/xin-hedera/haproxy-grpc-sample/sample/codenamecreator"
+	creator "sample/codenamecreator"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"

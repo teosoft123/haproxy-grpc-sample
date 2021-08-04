@@ -1,4 +1,4 @@
-module github.com/xin-hedera/haproxy-grpc-sample
+module sample
 
 go 1.13
 
