@@ -16,9 +16,6 @@ RUN protoc --go_out=plugins=grpc:. *.proto
 WORKDIR /go/src/app/
 RUN go build -o /output/client ./client/client.go
 
-
-
-
 FROM golang:alpine
 WORKDIR /app
 COPY --from=build /output/client .

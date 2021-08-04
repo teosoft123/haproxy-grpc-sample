@@ -16,9 +16,6 @@ RUN protoc --go_out=plugins=grpc:. *.proto
 WORKDIR /go/src/app/
 RUN go build -o /output/server ./server/server.go
 
-
-
-
 FROM golang:alpine
 EXPOSE 3000
 WORKDIR /app

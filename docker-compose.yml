@@ -6,26 +6,33 @@ services:
     image: haproxytechblog/grpc-sample-server
     build:
       context: ./sample
-      dockerfile: Dockerfile.server
+      dockerfile: server.dockerfile
+    hostname: server
+    container_name: server
 
   haproxy:
     image: haproxytech/haproxy-ubuntu:2.0.14
     environment:
-    - HAPROXY_TARGET_IP
+      - HAPROXY_TARGET_IP
+    hostname: haproxy
+    container_name: haproxy
     volumes:
-    - "./sample/haproxy/haproxy.cfg:/etc/haproxy/haproxy.cfg"
-    - "./sample/creds/haproxy.pem:/etc/haproxy/pem/haproxy.pem"
-    - "./sample/creds/server.crt:/etc/haproxy/pem/server.crt"
+      - "./sample/haproxy/haproxy.cfg:/etc/haproxy/haproxy.cfg"
+      - "./sample/creds/haproxy.pem:/etc/haproxy/pem/haproxy.pem"
+      - "./sample/creds/server.crt:/etc/haproxy/pem/server.crt"
     ports:
-    - "3001:3001"
+      - "3001:3001"
 
   client:
     image: haproxytechblog/grpc-sample-client
     build:
       context: ./sample
-      dockerfile: Dockerfile.client
+      dockerfile: client.dockerfile
     environment:
-    - "SERVER_ADDRESS=haproxy:3001"
-    - "TLS_CERT=haproxy.crt"
+      - "SERVER_ADDRESS=haproxy:3001"
+      - "TLS_CERT=haproxy.crt"
+    hostname: client
+    container_name: client
+    entrypoint: [ "./client", "-s", "haproxy:3001" ]
     depends_on:
-    - haproxy
+      - haproxy
